@@ -1,22 +1,99 @@
 <html>
 <head>
 <title>
-Marco de la derecha
+MARCO DERECHO
 </title>
 </head>
-<body bgcolor = "#ff9999">
+<font color = "#F4F4F4">
+<body background = "fondo derecho.png">
 <center>
 <h1>
-Restaurant COBAQ
+<i>
+FILOSOFOS
+<br>
+<u>
+teoria de la vida y la muerte
+</u>
+</i>
 </h1>
 </center>
-<hr>
+<div id="lluvia-letras">
+<h4>
 <br>
-<h2>
-Este restaurant tiene 20 a�os de haberse aperturado, esperamos que tu estadia en este lugar sea de gran valor, queremos siempre agradar a nuestros clientes y tener el mejor servicio para ellos.
-</h2>
-<center>
-<img src = "https://teresarestaurant.com/wp-content/uploads/2025/01/WA_00138-scaled.jpg">
-</center>
+Desde el inicio de la humanidad, el ser humano ha intentado encontrar 
+RESPUESTAS SOBRE EL SIGNIFICADO DE LA VIDA Y EL MISTERIO DE LA MUERTE.
+Estas preguntas han despertado curiosidad, temor y reflexión en diferentes épocas, llevando a muchas personas a buscar explicaciones sobre lo que ocurre con el alma, la existencia y el destino del ser humano. A lo largo de la historia, grandes pensadores dedicaron su vida a analizar estos temas, dejando ideas que aún hoy continúan siendo estudiadas y debatidas.
+<br>
+<br>
+Entre los filósofos más importantes que reflexionaron sobre este tema se encuentran Platón, René Descartes y Aristóteles. Cada uno desarrolló una visión distinta acerca de la vida, el alma y la muerte. Mientras algunos pensaban que el alma era inmortal y existía más allá del cuerpo, otros creían que la razón y el pensamiento eran la verdadera esencia del ser humano. Sus ideas marcaron profundamente la filosofía y ayudaron a formar distintas maneras de entender la existencia humana.
+<br>
+<br>
+Hablar sobre la vida y la muerte no solo implica pensar en el inicio y el final de la existencia, sino también reflexionar sobre el propósito de vivir, las emociones, el conocimiento y la relación entre el cuerpo y el alma. Las teorías de estos filósofos continúan despertando interés porque intentan responder preguntas que todavía siguen presentes en la actualidad. Conocer sus pensamientos permite comprender cómo, desde hace siglos, el ser humano ha tratado de descubrir el verdadero sentido de su existencia y el misterio que existe más allá de la muerte.
+</h4>
+</div>
+
+<style>
+  /* Mantiene los estilos y tamaño originales de tu h4 */
+  #lluvia-letras h4 {
+    font-size: inherit;
+    line-height: 1.6;
+  }
+
+  /* Estilo que hace que cada letra caiga de forma individual */
+  .letra {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(-40px);
+    animation: caer 0.4s ease-out forwards;
+  }
+
+  @keyframes caer {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    const contenedor = document.querySelector('#lluvia-letras h4');
+    if (!contenedor) return;
+
+    const nodos = Array.from(contenedor.childNodes);
+    contenedor.innerHTML = ''; // Limpiamos temporalmente para reconstruir
+
+    let contador = 0;
+
+    nodos.forEach(nodo => {
+      // Si el nodo es un <br>, lo dejamos exactamente igual para no romper los párrafos
+      if (nodo.nodeName === 'BR') {
+        contenedor.appendChild(nodo.cloneNode(true));
+      } else if (nodo.nodeType === Node.TEXT_NODE) {
+        // Si es texto, separamos letra por letra
+        const caracteres = nodo.textContent.split('');
+        
+        caracteres.forEach(caracter => {
+          if (caracter === '\n') return; // Saltamos saltos de línea invisibles del Bloc de notas
+
+          const span = document.createElement('span');
+          
+          if (caracter === ' ') {
+            span.innerHTML = '&nbsp;'; // Mantiene los espacios entre palabras
+          } else {
+            span.innerText = caracter;
+            span.classList.add('letra');
+            // Controla la velocidad en que caen las letras (0.005s es rápido y fluido)
+            span.style.animationDelay = `${contador * 0.005}s`;
+            contador++;
+          }
+          
+          contenedor.appendChild(span);
+        });
+      }
+    });
+  })();
+</script>
+
 </body>
 </html>
