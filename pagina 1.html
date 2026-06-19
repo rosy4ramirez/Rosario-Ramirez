@@ -38,7 +38,7 @@ Creía en la <b>reencarnación</b> del alma.
 La vida tiene como objetivo buscar la <b>verdad, la sabiduría y la virtud.</b>
 <br>
 <br>
-<div id="lluvia-platon">
+
 ¿Alguna vez te has preguntado qué ocurre después de la muerte? ¿Somos únicamente un cuerpo físico o existe algo más allá de lo que nuestros ojos pueden ver? Hace más de dos mil años, estas mismas preguntas despertaron la curiosidad de un filósofo que cambiaría para siempre la forma de entender la existencia humana: <u> Platón.</u> Sus ideas sobre la vida y la muerte no solo intentaban explicar qué somos, sino también cuál es nuestro verdadero propósito en el mundo.
 <br>
 <br>
@@ -58,75 +58,5 @@ En obras como el libro <b> Fedón </b>, Platón explica que las almas de las per
 <br>
 <br>
 Además, Platón defendía la creencia en la <b> reencarnación.</b> Según esta idea, el alma no necesariamente permanece para siempre fuera del cuerpo después de la muerte. Dependiendo de su conducta y de su grado de conocimiento, puede volver a nacer en otro cuerpo para continuar su aprendizaje y perfeccionamiento espiritual. Así, la existencia humana forma parte de un ciclo en el que el alma busca alcanzar la sabiduría y la pureza necesarias para regresar definitivamente al Mundo de las Ideas.
-</div>
-<style>
-  /* Mantiene los párrafos perfectos */
-  #lluvia-platon {
-    line-height: 1.6;
-  }
-
-  /* Aplica el efecto de caída a las letras sin alterar las etiquetas originales */
-  .letra-lluvia {
-    display: inline-block;
-    opacity: 0;
-    transform: translateY(-30px);
-    animation: caerLetraPlaton 0.4s ease-out forwards;
-  }
-
-  @keyframes caerLetraPlaton {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-</style>
-
-<script>
-  (function() {
-    const contenedor = document.getElementById('lluvia-platon');
-    if (!contenedor) return;
-
-    let contadorLetras = 0;
-
-    // Esta función recorre tu código letra por letra SIN borrar tus etiquetas <br> ni <b>
-    function transformarTextoALetras(nodo) {
-      if (nodo.nodeName === 'BR') {
-        return; // Deja los saltos de línea exactamente como están
-      }
-
-      if (nodo.nodeType === Node.TEXT_NODE) {
-        const texto = nodo.textContent;
-        // Evitamos romper espacios en blanco del Bloc de notas
-        if (texto.trim() === '' && !texto.includes(' ')) return;
-
-        const fragmento = document.createDocumentFragment();
-        
-        texto.split('').forEach(letra => {
-          if (letra === '\n' || letra === '\r') return;
-
-          const span = document.createElement('span');
-          if (letra === ' ') {
-            span.innerHTML = '&nbsp;'; // Mantiene los espacios entre palabras
-          } else {
-            span.innerText = letra;
-            span.classList.add('letra-lluvia');
-            span.style.animationDelay = `${contadorLetras * 0.003}s`; // Velocidad de la lluvia
-            contadorLetras++;
-          }
-          fragmento.appendChild(span);
-        });
-
-        nodo.parentNode.replaceChild(fragmento, nodo);
-      } else if (nodo.nodeType === Node.ELEMENT_NODE) {
-        // Si encuentra un <b>, entra a aplicar el efecto a sus letras internas sin destruir el <b>
-        const hijos = Array.from(nodo.childNodes);
-        hijos.forEach(transformarTextoALetras);
-      }
-    }
-
-    const nodosIniciales = Array.from(contenedor.childNodes);
-    nodosIniciales.forEach(transformarTextoALetras);
-  })();
-</script>
 </body>
 </html>
